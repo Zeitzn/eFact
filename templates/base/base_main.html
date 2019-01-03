@@ -1,0 +1,302 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>{%block title%}{% endblock %}</title>
+    <!--meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="D BUSINESS Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"
+    />
+    <!--//meta tags ends here-->
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+
+    <!-- bootstrap style sheet -->
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet" type="text/css" />
+    <!--smooth box-->
+    <link rel="stylesheet" href="{% static 'css/smoothbox.css'%}" type='text/css' media="all" />
+    <!--stylesheets-->
+    <link href="{% static 'css/style.css'%}" rel='stylesheet' type='text/css' media="all">
+    <link href="{% static 'css/style-price.css'%}" rel='stylesheet' type='text/css' media="all">
+    <!-- flexslider -->
+    <link rel="stylesheet" href="{% static 'css/flexslider.css'%}" type="text/css" media="all" />
+    <!-- fontawesome -->
+    <link href="{% static 'css/fontawesome-all.min.css'%}" rel="stylesheet" type="text/css" media="all">
+    <!-- Popup css (for Video Popup) -->
+    <link href="{% static 'css/popuo-box.css'%}" rel="stylesheet" type="text/css" media="all" />
+
+    <link href="//fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <!-- nav -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light sunat-color">
+            <h1><a class="navbar-brand" href="{% url 'main:index'%}"><span class="brand-d">e</span>Fact</a></h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link scroll" href="{% url 'main:index'%}">INICIO <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#price">PRECIOS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#about">BENEFICIOS</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        CLIENTES
+        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item scroll" href="#client">TESTIMONIOS</a>
+                            <!-- <a class="dropdown-item scroll" href="#news">NEWS</a> -->
+
+                        </div>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link scroll" href="#gallery">PROJECTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#team">TEAM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#blog">BLOG</a>
+                    </li> -->
+
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#mail">CONTÁCTANOS</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- //nav -->
+
+    {% block content %}
+    {% endblock %}
+
+
+    <!-- mail -->
+    <div class="banner-bottom mail-contact py-5" id="mail">
+        <div class="container">
+            <div class="h3-head text-center">
+                <h3 class="title-2">Contáctanos</h3>
+            </div>
+            <div class="w3ls_banner_bottom_grids py-3">
+                <div class="row">
+                    <div class="col-md-6 w3layouts_mail_grid_left">
+                        <div class="agileits_mail_grid_left">
+                            <h3>Información de contacto</h3>
+                            <ul>
+                                <li><label><i class="fas fa-map-marker"></i></label>Jr. Libertad 753 - Ayacucho, Perú.</li>
+                                <li><label><i class="far fa-envelope"></i></label><a href="mailto:info@example.com">mail@example.com</a>,
+                                    <a href="mailto:info@example1.com">mail@example1.com</a></li>
+                                <li><label><i class="fas fa-phone-volume"></i></label>+012 3456 3456, +012 3456 3457</li>
+                            </ul>
+                        </div>
+                        <div class="agileits_w3layouts_socila_mail">
+                            <h3>Compártenos en tus redes sociales</h3>
+                            <ul>
+                                <li><a href="#" class="w3_facebook"><i class="fab fa-facebook-f"></i> facebook</a></li>
+                                <!-- <li><a href="#" class="w3l_google-plus"><i class="fab fa-google-plus-g"></i> google-plus</a></li> -->
+                                <!-- <li><a href="#" class="agileits_linkedin"><i class="fab fa-linkedin-in"></i> linkedin</a></li> -->
+                                <li><a href="#" class="w3ls_twitter"><i class="fab fa-twitter"></i> twitter</a></li>
+                                <!-- <li><a href="#" class="w3ls_pinterest"><i class="fab fa-pinterest-p"></i> Pinterest</a></li> -->
+                                <!-- <li><a href="#" class="w3ls_vimeo"><i class="fab fa-vimeo-v"></i> Vimeo</a></li> -->
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 wthree_mail_pos">
+                        <form action="#" method="post">
+                            <div class="w3_agileits_contact_left">
+                                <h3>Formulario de contacto</h3>
+                                <input type="text" name="Name" placeholder="Tu nombre" required="">
+                                <input type="email" name="Email" placeholder="Tu dirección de correo electrónico" required="">
+                                <input type="text" name="Phone" placeholder="Número telefónico">
+                                <textarea placeholder="Mensaje..." required=""></textarea>
+
+                            </div>
+                            <div class="w3_agileits_contact_right">
+                                <input type="submit" value="Enviar" class="sunat-color">
+                            </div>
+                            <div class="clearfix"> </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- //mail -->
+
+    <!-- map -->
+    <div class="col-md-12 map-main">
+        <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.9503398796587!2d-73.9940307!3d40.719109700000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a27e2f24131%3A0x64ffc98d24069f02!2sCANADA!5e0!3m2!1sen!2sin!4v1441710758555"
+            allowfullscreen=""></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d971.2697965769105!2d-74.22875497083248!3d-13.157404993522064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91127df18b42c3f9%3A0xd4a8df5c1a4c29fb!2sJir%C3%B3n+Libertad+753%2C+Ayacucho!5e0!3m2!1ses-419!2spe!4v1546532075348" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+
+    </div>
+    <!-- //map -->
+
+    <!-- footer -->
+    <!-- <footer>
+        <p class="copyright-agileinfo"> &copy; 2018 D BUSINESS. All Rights Reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+    </footer> -->
+
+    <!-- //footer -->
+
+    <script src="{% static 'js/jquery.min.v3.js'%}"></script>
+
+    <script src="{% static 'js/jquery-2.2.3.min.js'%}"></script>
+
+    <!-- gallery -->
+    <script src="{% static 'js/smoothbox.jquery2.js'%}"></script>
+    <!-- //gallery -->
+
+
+    <!-- pop-up(for video popup)-->
+    <script src="{% static 'js/jquery.magnific-popup.js'%}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.popup-with-zoom-anim').magnificPopup({
+                type: 'inline',
+                fixedContentPos: false,
+                fixedBgPos: true,
+                overflowY: 'auto',
+                closeBtnInside: true,
+                preloader: false,
+                midClick: true,
+                removalDelay: 300,
+                mainClass: 'my-mfp-zoom-in'
+            });
+
+        });
+    </script>
+    <!-- //pop-up-box (syllabus section video)-->
+
+    <!-- video js (background) -->
+    <script src="{% static 'js/jquery.vide.min.js'%}"></script>
+    <!-- //video js (background) -->
+
+
+    <!-- banner Slider script  -->
+    <script src="{% static 'js/responsiveslides.min.js'%}"></script>
+    <script>
+        $(function () {
+            $("#slider, #slider1").responsiveSlides({
+                auto: true,
+                nav: false,
+                speed: 1500,
+                namespace: "callbacks",
+                pager: true,
+            });
+        });
+    </script>
+    <!-- //banner Slider-JavaScript -->
+    <script src="{% static 'js/responsiveslides.min.js'%}"></script>
+    <script>
+        $(function () {
+            $("#slider4").responsiveSlides({
+                auto: true,
+                pager: true,
+                nav: false,
+                speed: 1000,
+                namespace: "callbacks",
+                before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                }
+            });
+        });
+    </script>
+
+
+
+    <!-- start-smooth-scrolling -->
+    <script src="{% static 'js/move-top.js'%}"></script>
+    <script src="{% static 'js/easing.js'%}"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 1000);
+            });
+        });
+    </script>
+    <!-- //end-smooth-scrolling -->
+    <!-- smooth-scrolling-of-move-up -->
+    <script>
+        $(document).ready(function () {
+            /*
+            var defaults = {
+            	containerID: 'toTop', // fading element id
+            	containerHoverID: 'toTopHover', // fading element hover id
+            	scrollSpeed: 1200,
+            	easingType: 'linear'
+            };
+            */
+
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+    <script src="{% static 'js/SmoothScroll.min.js'%}"></script>
+    <!-- //smooth-scrolling-of-move-up -->
+
+
+
+
+    <!-- FlexSlider-JavaScript -->
+    <script defer src="{% static 'js/jquery.flexslider.js'%}"></script>
+    <script>
+        $(function () {
+            SyntaxHighlighter.all();
+        });
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                start: function (slider) {
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+    </script>
+    <!-- //FlexSlider-JavaScript -->
+
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+
+</body>
+
+</html>
