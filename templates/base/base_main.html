@@ -29,6 +29,7 @@
     <!--stylesheets-->
     <link href="{% static 'css/style.css'%}" rel='stylesheet' type='text/css' media="all">
     <link href="{% static 'css/style-price.css'%}" rel='stylesheet' type='text/css' media="all">
+    <link href="{% static 'css/style-login.css'%}" rel='stylesheet' type='text/css' media="all">
     <!-- flexslider -->
     <link rel="stylesheet" href="{% static 'css/flexslider.css'%}" type="text/css" media="all" />
     <!-- fontawesome -->
@@ -85,6 +86,9 @@
 
                     <li class="nav-item">
                         <a class="nav-link scroll" href="#mail">CONTÁCTANOS</a>
+                    </li>
+                    <li class="nav-item" style="background-color:#ab1542; border-radius:40px;">
+                        <a class="nav-link " href="{% url 'main:login'%}">Ingresar</a>
                     </li>
 
                 </ul>

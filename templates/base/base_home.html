@@ -1,0 +1,376 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <title>{%block title%}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/favicon.ico" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700italic,700,900,900italic" rel="stylesheet">
+
+    <!-- STYLESHEETS -->
+    <style type="text/css">
+            [fuse-cloak],
+            .fuse-cloak {
+                display: none !important;
+            }
+        </style>
+
+    <!-- Icons.css'%} -->
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/icons/fuse-icon-font/style.css'%}">
+    <!-- Animate.css'%} -->
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/node_modules/animate.css'%}/animate.min.css'%}">
+    <!-- PNotify -->
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/node_modules/pnotify/dist/PNotifyBrightTheme.css'%}">
+    <!-- Nvd3 - D3 Charts -->
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/node_modules/nvd3/build/nv.d3.min.css'%}" />
+    <!-- Perfect Scrollbar -->
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/node_modules/perfect-scrollbar/css/perfect-scrollbar.css'%}" />
+    <!-- Fuse Html -->
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/fuse-html/fuse-html.min.css'%}" />
+    <!-- Main CSS -->
+    <link type="text/css" rel="stylesheet" href="{% static 'assets/css/main.css'%}">
+    <!-- / STYLESHEETS -->
+
+    <!-- JAVASCRIPT -->
+    <!-- jQuery -->
+    <script type="text/javascript" src="{% static 'assets/node_modules/jquery/dist/jquery.min.js'%}"></script>
+    <!-- Mobile Detect -->
+    <script type="text/javascript" src="{% static 'assets/node_modules/mobile-detect/mobile-detect.min.js'%}"></script>
+    <!-- Perfect Scrollbar -->
+    <script type="text/javascript" src="{% static 'assets/node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js'%}"></script>
+    <!-- Popper.js'%} -->
+    <script type="text/javascript" src="{% static 'assets/node_modules/popper.js'%}/dist/umd/popper.min.js'%}"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{% static 'assets/node_modules/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+    <!-- Nvd3 - D3 Charts -->
+    <script type="text/javascript" src="{% static 'assets/node_modules/d3/d3.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/node_modules/nvd3/build/nv.d3.min.js'%}"></script>
+    <!-- Data tables -->
+    <script type="text/javascript" src="{% static 'assets/node_modules/datatables.net/js/jquery.dataTables.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/node_modules/datatables-responsive/js/dataTables.responsive.js'%}"></script>
+    <!-- PNotify -->
+    <script type="text/javascript" src="{% static 'assets/node_modules/pnotify/dist/iife/PNotify.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/node_modules/pnotify/dist/iife/PNotifyStyleMaterial.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/node_modules/pnotify/dist/iife/PNotifyButtons.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/node_modules/pnotify/dist/iife/PNotifyCallbacks.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/node_modules/pnotify/dist/iife/PNotifyMobile.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/node_modules/pnotify/dist/iife/PNotifyHistory.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/node_modules/pnotify/dist/iife/PNotifyDesktop.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/node_modules/pnotify/dist/iife/PNotifyConfirm.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/node_modules/pnotify/dist/iife/PNotifyReference.js'%}"></script>
+    <!-- Fuse Html -->
+    <script type="text/javascript" src="{% static 'assets/fuse-html/fuse-html.min.js'%}"></script>
+    <!-- Main JS -->
+    <script type="text/javascript" src="{% static 'assets/js/main.js'%}"></script>
+    <!-- / JAVASCRIPT -->
+</head>
+
+<body class="layout layout-vertical layout-left-navigation layout-below-toolbar layout-below-footer">
+    <main>
+        <div id="wrapper">
+            <aside id="aside" class="aside aside-left" data-fuse-bar="aside" data-fuse-bar-media-step="md" data-fuse-bar-position="left">
+                <div class="aside-content bg-primary-700 text-auto">
+
+                    <div class="aside-toolbar">
+
+                        <div class="logo">
+                            <span class="logo-icon">eF</span>
+                            <span class="logo-text">eFact</span>
+                        </div>
+
+                        <button id="toggle-fold-aside-button" type="button" class="btn btn-icon d-none d-lg-block" data-fuse-aside-toggle-fold>
+                            <i class="icon icon-backburger"></i>
+                        </button>
+
+                    </div>
+
+                    <ul class="nav flex-column custom-scrollbar" id="sidenav" data-children=".nav-item">
+
+                        <li class="subheader">
+                            <span>OPERACIONES</span>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link ripple " href="index.html" data-url="index.html">
+
+                                <i class="icon s-4 icon-tile-four"></i>
+
+                                <span>Home</span>
+                            </a>
+                        </li>
+
+
+
+                        <li class="subheader">
+                            <span>MANTENIMIENTO</span>
+                        </li>
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link ripple " href="pages-coming-soon.html" data-url="index.html">
+
+                                <i class="icon s-4 icon-basket"></i>
+
+                                <span>Productos</span>
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+
+            </aside>
+            <div class="content-wrapper">
+                <nav id="toolbar" class="bg-white">
+
+                    <div class="row no-gutters align-items-center flex-nowrap">
+
+                        <div class="col">
+
+                            <div class="row no-gutters align-items-center flex-nowrap">
+
+                                <button type="button" class="toggle-aside-button btn btn-icon d-block d-lg-none" data-fuse-bar-toggle="aside">
+                                    <i class="icon icon-menu"></i>
+                                </button>
+
+                                <div class="toolbar-separator d-block d-lg-none"></div>
+
+
+
+                                <div class="toolbar-separator"></div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-auto">
+
+                            <div class="row no-gutters align-items-center justify-content-end">
+
+                                <div class="user-menu-button dropdown">
+
+                                    <div class="dropdown-toggle ripple row align-items-center no-gutters px-2 px-sm-4" role="button" id="dropdownUserMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="avatar-wrapper">
+                                            <img class="avatar" src="{% static 'assets/images/avatars/profile.jpg'%}">
+                                            <i class="status text-green icon-checkbox-marked-circle s-4"></i>
+                                        </div>
+                                        <span class="username mx-3 d-none d-md-block">Isac Huamán</span>
+                                    </div>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownUserMenu">
+
+                                        <a class="dropdown-item" href="#">
+                                            <div class="row no-gutters align-items-center flex-nowrap">
+                                                <i class="icon-account"></i>
+                                                <span class="px-3">Mi perfil</span>
+                                            </div>
+                                        </a>
+
+                                        <a class="dropdown-item" href="#">
+                                            <div class="row no-gutters align-items-center flex-nowrap">
+                                                <i class="icon-email"></i>
+                                                <span class="px-3">Inbox</span>
+                                            </div>
+                                        </a>
+
+                                        <a class="dropdown-item" href="#">
+                                            <div class="row no-gutters align-items-center flex-nowrap">
+                                                <i class="status text-green icon-checkbox-marked-circle"></i>
+                                                <span class="px-3">Online</span>
+                                            </div>
+                                        </a>
+
+                                        <div class="dropdown-divider"></div>
+
+                                        <a class="dropdown-item" href="#">
+                                            <div class="row no-gutters align-items-center flex-nowrap">
+                                                <i class="icon-logout"></i>
+                                                <span class="px-3">Logout</span>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="content custom-scrollbar">
+
+                    <div id="project-dashboard" class="page-layout simple right-sidebar">
+
+                        <div class="page-content-wrapper custom-scrollbar">
+
+                            <!-- HEADER -->
+                                <!-- <div class="page-header bg-primary text-auto d-flex flex-column justify-content-between px-6 pt-4 pb-0">
+
+
+
+                            <div class="row no-gutters align-items-center project-selection">
+
+                                    <div class="selected-project h6 px-4 py-2">ACME Corp. Backend App</div>
+
+                                    <div class="project-selector">
+                                        <button type="button" class="btn btn-icon">
+                                            <i class="icon icon-dots-horizontal"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>-->
+                            <!-- / HEADER -->
+
+                            <!-- CONTENT -->
+                            <div class="page-content">
+
+                              {% block content %}
+                              {% endblock %}
+
+
+                            </div>
+                            <!-- / CONTENT -->
+
+                        </div>
+
+                        <aside class="page-sidebar custom-scrollbar" data-fuse-bar="dashboard-project-sidebar" data-fuse-bar-media-step="lg" data-fuse-bar-position="right">
+                            <!-- WIDGET GROUP -->
+                            <div class="widget-group">
+
+                                <!-- NOW WIDGET -->
+                                <div class="widget widget-now">
+
+                                    <div class="widget-header row no-gutters align-items-center justify-content-between pl-4 py-4">
+
+                                        <div class="h6">Monday, 16:37:16</div>
+
+                                        <button type="button" class="btn btn-icon" aria-label="Options">
+                                            <i class="icon icon-dots-vertical"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="widget-content d-flex flex-column align-items-center justify-content-center p-4 pb-6">
+                                        <div class="month text-muted">May</div>
+                                        <div class="day text-muted">8</div>
+                                        <div class="year text-muted">2017</div>
+                                    </div>
+
+                                </div>
+                                <!-- / NOW WIDGET -->
+
+                                <div class="divider"></div>
+
+                                <!-- WEATHER WIDGET -->
+                                <div class="widget widget-weather">
+
+                                    <div class="widget- header row no-gutters align-items-center justify-content-between pl-4 py-4">
+
+                                        <div class="row no-gutters align-items-center">
+                                            <i class="icon-map-marker mr-2"></i>
+                                            <span class="h6">New York</span>
+                                        </div>
+
+                                        <button type="button" class="btn btn-icon" aria-label="Options">
+                                            <i class="icon icon-dots-vertical"></i>
+                                        </button>
+
+                                    </div>
+
+                                    <div class="d-flex flex-column align-items-center justify-content-center p-4 pb-8">
+
+                                        <div class="today-weather row no-gutters align-items-center justify-content-center">
+                                            <i class="icon-weather-pouring s-10 mr-4"></i>
+                                            <span class="h1">22</span>
+                                            <span class="h1 text-muted">&deg;</span>
+                                            <span class="h1 text-muted">C</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row no-gutters align-items-center justify-content-between p-4">
+
+                                        <div class="row no-gutters align-items-center">
+                                            <i class="icon-weather-windy icon mr-2 s-5"></i>
+                                            <span>12</span>
+                                            <span class="text-muted ml-1">KMH</span>
+                                        </div>
+
+                                        <div class="row align-items-center">
+                                            <i class="icon-compass-outline icon mr-2 s-5"></i>
+                                            <span>NW</span>
+                                        </div>
+
+                                        <div class="row no-gutters align-items-center">
+                                            <i class="icon-umbrella icon mr-2 s-5"></i>
+                                            <span>98%</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row no-gutters align-items-center justify-content-between p-4">
+
+                                        <span class="">Sunday</span>
+
+                                        <div class="row no-gutters align-items-center">
+                                            <i class="mr-4 icon-weather-pouring"></i>
+                                            <span class="h5">21</span>
+                                            <span class="h5 text-muted">&deg;</span>
+                                            <span class="h5 text-muted">C</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row no-gutters align-items-center justify-content-between p-4">
+
+                                        <span class="">Sunday</span>
+
+                                        <div class="row no-gutters align-items-center">
+                                            <i class="mr-4 icon-weather-pouring"></i>
+                                            <span class="h5">19</span>
+                                            <span class="h5 text-muted">&deg;</span>
+                                            <span class="h5 text-muted">C</span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row no-gutters align-items-center justify-content-between p-4">
+
+                                        <span class="">Tuesday</span>
+
+                                        <div class="row no-gutters align-items-center">
+                                            <i class="mr-4 icon-weather-partlycloudy"></i>
+                                            <span class="h5">24</span>
+                                            <span class="h5 text-muted">&deg;</span>
+                                            <span class="h5 text-muted">C</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- / WEATHER WIDGET -->
+
+                                <div class="divider"></div>
+                            </div>
+                            <!-- / WIDGET GROUP -->
+                        </aside>
+                    </div>
+
+                    <script type="text/javascript" src="{% static 'assets/js/apps/dashboard/project.js'%}"></script>
+
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+</body>
+
+</html>
