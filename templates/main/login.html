@@ -23,15 +23,15 @@
             <p class="login-box-msg"><b>Ingresar al sistema<span class=""></span></b></p>
 
 
-            <form method="post">
+            <form method="post" action="{% url 'main:login'%}">
 
-
+{% csrf_token%}
                 <div class="form-group">
                     <div class="input-group">
 
                         <span class="input-group-addon" style="color:#000000"><i class="glyphicon glyphicon-user"></i></span>
 
-                        <input type="text" class="form-control" id="txtUsuario" placeholder="Correo" required name="correo">
+                        <input type="text" class="form-control" id="txtUsuario" placeholder="Nombre de usuario" required name="username">
 
                     </div>
                 </div>
@@ -41,7 +41,7 @@
 
                         <span class="input-group-addon" style="color:#000000"><i class="glyphicon glyphicon-lock"></i></span>
 
-                        <input type="password" class="form-control" id="txtClave" placeholder="Contraseña" required name="contrasena">
+                        <input type="password" class="form-control" id="txtClave" placeholder="Contraseña" required name="password">
 
                     </div>
                 </div>
