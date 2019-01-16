@@ -1,13 +1,13 @@
 {% extends 'base/base_home.html'%}
 {% load staticfiles %}
 
-{%block title%}Producto-eFact{% endblock %}
+{%block title%}Establecimiento - eFact{% endblock %}
 
 {%block content%}
 <div class="jumbotron">
     <div class="col-md-5">
         <form action="" method="POST" id="form-producto">
-            <h3>Producto</h3>
+            <h3>Establecimiento</h3>
             <!-- {% if messages %}
             <div class="alert-success">
                 {% for message in messages %}
@@ -21,14 +21,23 @@
             </div>
             {% csrf_token %}
             <div class="form-group-p">
-                <label for="">Nombre:</label><br>
-                <span id="msg-precio-unitario" class="span-alert"></span>
-                <input type="text" class="form-control-p" name="nombre" id="id_nombre">
+                <label for="">Dirección:</label><br>
+                <span id="msg-direccion" class="span-alert"></span>
+                <input type="text" class="form-control-p" name="direccion" id="id_direccion">
             </div>
             <div class="form-group-p">
-                <label for="">Precio unitario (S/):</label><br>
-                <span id="msg-nombre" class="span-alert"></span>
-                <input type="number" class="form-control-p" name="precio_unitario" step="0.1" id="id_precio_unitario">
+                <label for="">Ubigeo:</label><br>
+                <span id="msg-ubigeo" class="span-alert"></span>
+                <input type="number" class="form-control-p" name="ubigeo" id="id_ubigeo">
+            </div>
+
+            <div class="form-group-p">
+                <label for="">Tipo:</label>
+                <span id="msg-tipo" class="span-alert"></span>
+                <select name="tipo_establecimiento" id="id_tipo" class="form-control-p">
+                    <option value="Domicilio fiscal">Domicilio Fiscal</option>
+                    <option value="Anexo">Anexo</option>
+                </select>
             </div>
 
             <div class="form-group-p">                   
@@ -47,10 +56,13 @@
                         #
                     </td>
                     <td>
-                        NOMBRE
+                        DIRECCION
                     </td>
                     <td>
-                        PRECIO UNITARIO (S/)
+                        TIPO DE ESTABLECIMIENTO
+                    </td>
+                    <td>
+                        UBIGEO
                     </td>
                     <td></td>
                 </tr>
@@ -59,22 +71,27 @@
     
             </tfoot>
             <tbody>
-                {% if productos %}
-                {% for item in productos %}
+                {% if establecimientos %}
+                {% for item in establecimientos %}
                 <tr id="tr_{{item.id}}">
                     <td>
                         {{forloop.counter}}
                     </td>
-                    <td id="td_nombre_{{item.id}}">
-                        {{item.nombre}}
+                    <td id="td_direccion_{{item.id}}">
+                        {{item.direccion}}
                         
                     </td>
-                    <td class="text-right" style="padding-right:100px;" id="td_precio_{{item.id}}">
-                        {{item.precio_unitario}}
+                    <td id="td_tipo_establecimiento_{{item.id}}">
+                        {{item.tipo_establecimiento}}
+                        
+                    </td>
+                    <td id="td_ubigeo_{{item.id}}">
+                        {{item.ubigeo}}
+                        
                     </td>
                     <td id="td_actions_{{item.id}}">
-                        <a onclick="editProduct('{{item.id}}','{{item.nombre}}','{{item.precio_unitario}}')" class="btn btn-warning btn-sm">Editar</a>
-                        <a onclick="deleteProduct('{{item.id}}','{{item.nombre}}')" class="btn btn-danger btn-sm">Eliminar</a>
+                        <a onclick="editEstablecimiento('{{item.id}}','{{item.direccion}}','{{item.tipo_establecimiento}}','{{item.ubigeo}}')" class="btn btn-warning btn-sm">Editar</a>
+                        <a onclick="deleteEstablecimiento('{{item.id}}','{{item.direccion}}')" class="btn btn-danger btn-sm">Eliminar</a>
                         
                     </td>
                 </tr>
@@ -94,7 +111,7 @@
 
 <script>
 
-$("#id_nombre").focus()
+$("#id_direccion").focus()
 
 
 function validForm(){

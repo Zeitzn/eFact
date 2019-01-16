@@ -4,7 +4,7 @@ from apps.usuario.models import Usuario
 # Create your models here.
 class Establecimiento(models.Model):
     TIPO_ESTABLECIMIENTO = (
-        ('Fiscal', 'Domicilio Fiscal'),
+        ('Domicilio fiscal', 'Domicilio Fiscal'),
         ('Anexo', 'Anexo'),
     )
     usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT,null=True)
