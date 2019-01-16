@@ -1,0 +1,21 @@
+.fact-panel{
+    border: 1px solid cadetblue;
+    padding: 4px;
+}
+
+.fact-header{
+    border: 1px solid cadetblue;
+    height: 90px;
+    margin-bottom: 4px;
+}
+
+.fact-body{
+    border: 1px solid cadetblue;
+    height: 90px;
+    margin-bottom: 4px;
+}
+
+.fact-footer{
+    border: 1px solid cadetblue;
+    height: 40px;
+}

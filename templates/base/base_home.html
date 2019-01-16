@@ -34,6 +34,10 @@
     <link type="text/css" rel="stylesheet" href="{% static 'assets/fuse-html/fuse-html.min.css'%}" />
     <!-- Main CSS -->
     <link type="text/css" rel="stylesheet" href="{% static 'assets/css/main.css'%}">
+    <!-- Personalizados CSS -->
+    <link href="{% static 'css/personalizado/factura.css'%}" rel='stylesheet' type='text/css' media="all">
+    <link href="{% static 'css/personalizado/forms.css'%}" rel='stylesheet' type='text/css' media="all">
+    <link href="{% static 'css/personalizado/tabla.css'%}" rel='stylesheet' type='text/css' media="all">
     <!-- / STYLESHEETS -->
 
     <!-- JAVASCRIPT -->
@@ -97,7 +101,7 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link ripple " href="index.html" data-url="index.html">
+                            <a class="nav-link ripple " href="{% url 'home:index'%}">
 
                                 <i class="icon s-4 icon-tile-four"></i>
 
@@ -114,7 +118,7 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link ripple " href="pages-coming-soon.html" data-url="index.html">
+                            <a class="nav-link ripple " href="{% url 'producto:index'%}">
 
                                 <i class="icon s-4 icon-basket"></i>
 
@@ -242,12 +246,12 @@
 
                         </div>
 
-                        <aside class="page-sidebar custom-scrollbar" data-fuse-bar="dashboard-project-sidebar" data-fuse-bar-media-step="lg" data-fuse-bar-position="right">
+                        <!-- <aside class="page-sidebar custom-scrollbar" data-fuse-bar="dashboard-project-sidebar" data-fuse-bar-media-step="lg" data-fuse-bar-position="right"> -->
                             <!-- WIDGET GROUP -->
-                            <div class="widget-group">
+                            <!-- <div class="widget-group"> -->
 
                                 <!-- NOW WIDGET -->
-                                <div class="widget widget-now">
+                                <!-- <div class="widget widget-now">
 
                                     <div class="widget-header row no-gutters align-items-center justify-content-between pl-4 py-4">
 
@@ -264,13 +268,13 @@
                                         <div class="year text-muted">2017</div>
                                     </div>
 
-                                </div>
+                                </div> -->
                                 <!-- / NOW WIDGET -->
 
-                                <div class="divider"></div>
+                                <!-- <div class="divider"></div> -->
 
                                 <!-- WEATHER WIDGET -->
-                                <div class="widget widget-weather">
+                                <!-- <div class="widget widget-weather">
 
                                     <div class="widget- header row no-gutters align-items-center justify-content-between pl-4 py-4">
 
@@ -354,13 +358,13 @@
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- / WEATHER WIDGET -->
 
-                                <div class="divider"></div>
-                            </div>
+                                <!-- <div class="divider"></div> -->
+                            <!-- </div> -->
                             <!-- / WIDGET GROUP -->
-                        </aside>
+                        <!-- </aside> -->
                     </div>
 
                     <script type="text/javascript" src="{% static 'assets/js/apps/dashboard/project.js'%}"></script>
@@ -371,6 +375,9 @@
 
         </div>
     </main>
+
+    {% block scripts %}
+{% endblock %}
 </body>
 
 </html>

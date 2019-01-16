@@ -1,0 +1,210 @@
+{% extends 'base/base_home.html'%}
+{% load staticfiles %}
+
+{%block title%}Producto-eFact{% endblock %}
+
+{%block content%}
+<div class="jumbotron">
+    <div class="col-md-5">
+        <form action="" method="POST" id="form-producto">
+            <h3>Producto</h3>
+            <!-- {% if messages %}
+            <div class="alert-success">
+                {% for message in messages %}
+                <li> {{ message }} </li>
+                {% endfor %}
+            </div>
+            {% endif %} -->
+
+            <div class="" id="msg-success">
+
+            </div>
+            {% csrf_token %}
+            <div class="form-group-p">
+                <label for="">Nombre:</label><br>
+                <span id="msg-precio-unitario" class="span-alert"></span>
+                <input type="text" class="form-control-p" name="nombre" id="id_nombre">
+            </div>
+            <div class="form-group-p">
+                <label for="">Precio unitario (S/):</label><br>
+                <span id="msg-nombre" class="span-alert"></span>
+                <input type="number" class="form-control-p" name="precio_unitario" step="0.1" id="id_precio_unitario">
+            </div>
+
+            <div class="form-group-p">                   
+                <input type="submit" value="Registrar" class="btn btn-primary btn-small">
+            </div>
+        </form>
+    </div>
+
+    <hr>
+
+    <div col-md-12 id="panel-table" class="table-responsive">
+        <table class="table table-bordered table-hover small">
+            <thead>
+                <tr>
+                    <td>
+                        #
+                    </td>
+                    <td>
+                        NOMBRE
+                    </td>
+                    <td>
+                        PRECIO UNITARIO (S/)
+                    </td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tfoot>
+    
+            </tfoot>
+            <tbody>
+                {% if productos %}
+                {% for item in productos %}
+                <tr id="tr_{{item.id}}">
+                    <td>
+                        {{forloop.counter}}
+                    </td>
+                    <td id="td_nombre_{{item.id}}">
+                        {{item.nombre}}
+                        
+                    </td>
+                    <td class="text-right" style="padding-right:100px;" id="td_precio_{{item.id}}">
+                        {{item.precio_unitario}}
+                    </td>
+                    <td id="td_actions_{{item.id}}">
+                        <a onclick="editProduct('{{item.id}}','{{item.nombre}}','{{item.precio_unitario}}')" class="btn btn-warning btn-sm">Editar</a>
+                        <a onclick="deleteProduct('{{item.id}}','{{item.nombre}}')" class="btn btn-danger btn-sm">Eliminar</a>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+$("#id_nombre").focus()
+
+
+function validForm(){
+    var nombre=$("#id_nombre").val();
+    var precio_unitario=$("#id_precio_unitario").val();
+
+    console.log(nombre)
+
+    if (nombre=='' || precio_unitario=='') {
+        return false
+    } else {
+        return true
+    }
+}
+
+$("#form-producto").on("submit",function(e){
+    e.preventDefault()
+    
+    if (validForm()==true) {      
+    
+        $.ajax({
+            method:"POST",
+            url:'{% url "producto:index"%}',
+            data:$('#form-producto').serialize(),
+            success:function(data){                  
+                $("#panel-table").load(" #panel-table>*","");        
+                $("#msg-nombre").html('')
+                $("#msg-precio-unitario").html('')
+                $("#msg-success").html('<div class="alert-success"><label>Registro exitoso</label></div>')
+            }
+        })
+    } else {
+        var msg='Complete este campo'
+        $("#msg-nombre").html(msg)
+        $("#msg-precio-unitario").html(msg)
+        $("#msg-success").html('')
+    }
+})
+
+
+
+function editProduct(id,nombre,precio){
+    var id_producto=id;
+    
+    
+    
+
+    $("#td_nombre_"+id).html("<input type='text' value='"+nombre+"' class='form-control-p' id='edit_nombre_"+id+"'/> ");
+    $("#td_precio_"+id).html("<input type='text' value='"+precio+"' class='form-control-p' id='edit_precio_"+id+"' step='0.1'/> ");
+    $("#td_actions_"+id).html('<a href="#" id="guardar_'+id+'">Guardar</a>')
+    $("#edit_"+id).focus();
+
+
+    var v_nombre=$("#edit_nombre_"+id).val();
+    var v_precio=$("#edit_precio_"+id).val();
+
+    $("#edit_nombre_"+id).keyup(function(){
+        v_nombre=$("#edit_nombre_"+id).val();
+    })
+    $("#edit_precio_"+id).keyup(function(e){       
+        
+        if(e.keyCode==188){
+            return false;
+        }
+        v_precio=$("#edit_precio_"+id).val();
+        
+    })
+    
+    
+    $("#guardar_"+id).on("click",function(){
+        $.ajax({
+            method:"POST",
+            // url:'update/'+id+'/'+nombre+'/'+precio,
+            url:'{% url "producto:update"%}',
+            // contentType:'application/json',
+            data:{
+                'id':id_producto,
+                'nombre':v_nombre,
+                'precio':v_precio,
+            },
+            success:function(data){                  
+                // $("#panel-table").load(" #panel-table>*","");        
+                $("#tr_"+id).load(" #tr_"+id+">*","");    
+            }
+        })
+    })
+    
+}
+function deleteProduct(id,nombre){
+    var id_producto=id;
+
+    var c=confirm("¿Está seguro que desea eliminar el producto "+nombre+"?")
+    if(c=true){
+        $.ajax({
+            method:"POST",
+            // url:'update/'+id+'/'+nombre+'/'+precio,
+            url:'{% url "producto:delete"%}',
+            // contentType:'application/json',
+            data:{
+                'id':id_producto,                
+            },
+            success:function(data){                  
+                // $("#panel-table").load(" #panel-table>*","");        
+                $("#tr_"+id).load(" #tr_"+id+">*","");       
+                
+            }
+        })
+    }
+}
+
+
+</script>
+{% endblock %}
