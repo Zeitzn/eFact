@@ -157,31 +157,38 @@ $("#form-establecimiento").on("submit",function(e){
 
 
 
-function editProduct(id,nombre,precio){
-    var id_producto=id;
+function editEstablecimiento(id,direccion,tipo,ubigeo){
+    var id_establecimiento=id;
     
     
     
 
-    $("#td_nombre_"+id).html("<input type='text' value='"+nombre+"' class='form-control-p' id='edit_nombre_"+id+"'/> ");
-    $("#td_precio_"+id).html("<input type='text' value='"+precio+"' class='form-control-p' id='edit_precio_"+id+"' step='0.1'/> ");
+    $("#td_direccion_"+id).html("<input type='text' value='"+direccion+"' class='form-control-p' id='edit_direccion_"+id+"'/> ");
+    // $("#td_tipo_establecimiento_"+id).html("<input type='text' value='"+tipo+"' class='form-control-p' id='edit_tipo_"+id+"'/> ");
+    $("#td_tipo_establecimiento_"+id).html(
+        "<select value='"+tipo+"' class='form-control-p' id='edit_tipo_"+id+"'> "
+        +'<option value="Anexo">Anexo</option>'
+        +'<option value="Domicilio fiscal">Domicilio Fiscal</option>'
+        +'</select>'        
+        );
+    $("#td_ubigeo_"+id).html("<input type='text' value='"+ubigeo+"' class='form-control-p' id='edit_ubigeo_"+id+"'/> ");
     $("#td_actions_"+id).html('<a href="#" id="guardar_'+id+'">Guardar</a>')
     $("#edit_"+id).focus();
 
+    $("#edit_tipo_"+id).val(tipo)
 
-    var v_nombre=$("#edit_nombre_"+id).val();
-    var v_precio=$("#edit_precio_"+id).val();
+    var v_direccion=$("#edit_direccion_"+id).val();
+    var v_tipo_establecimiento=$("#edit_tipo_"+id).val();
+    var v_ubigeo=$("#edit_ubigeo_"+id).val();
 
-    $("#edit_nombre_"+id).keyup(function(){
-        v_nombre=$("#edit_nombre_"+id).val();
+    $("#edit_direccion_"+id).keyup(function(){
+        v_direccion=$("#edit_direccion_"+id).val();
     })
-    $("#edit_precio_"+id).keyup(function(e){       
-        
-        if(e.keyCode==188){
-            return false;
-        }
-        v_precio=$("#edit_precio_"+id).val();
-        
+    $("#edit_tipo_"+id).on('change',function(e){   
+        v_tipo_establecimiento=$("#edit_tipo_"+id).val();        
+    })
+    $("#edit_ubigeo_"+id).keyup(function(){
+        v_ubigeo=$("#edit_ubigeo_"+id).val();
     })
     
     
@@ -189,12 +196,13 @@ function editProduct(id,nombre,precio){
         $.ajax({
             method:"POST",
             // url:'update/'+id+'/'+nombre+'/'+precio,
-            url:'{% url "producto:update"%}',
+            url:'{% url "establecimiento:update"%}',
             // contentType:'application/json',
             data:{
-                'id':id_producto,
-                'nombre':v_nombre,
-                'precio':v_precio,
+                'id':id_establecimiento,
+                'direccion':v_direccion,
+                'tipo_establecimiento':v_tipo_establecimiento,
+                'ubigeo':v_ubigeo,
             },
             success:function(data){                  
                 // $("#panel-table").load(" #panel-table>*","");        
@@ -204,18 +212,18 @@ function editProduct(id,nombre,precio){
     })
     
 }
-function deleteProduct(id,nombre){
-    var id_producto=id;
+function deleteEstablecimiento(id,nombre){
+    var id_establecimiento=id;
 
-    var c=confirm("¿Está seguro que desea eliminar el producto "+nombre+"?")
+    var c=confirm("¿Está seguro que desea eliminar el establecimiento "+nombre+"?")
     if(c==true){
         $.ajax({
             method:"POST",
             // url:'update/'+id+'/'+nombre+'/'+precio,
-            url:'{% url "producto:delete"%}',
+            url:'{% url "establecimiento:delete"%}',
             // contentType:'application/json',
             data:{
-                'id':id_producto,                
+                'id':id_establecimiento,                
             },
             success:function(data){                  
                 // $("#panel-table").load(" #panel-table>*","");        

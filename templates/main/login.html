@@ -20,7 +20,7 @@
 
             </div> -->
 
-            <p class="login-box-msg"><b>Ingresar al sistema<span class=""></span></b></p>
+            <b><p class="login-box-msg">Ingresar al sistema</p></b>
 
 
             <form method="post" action="{% url 'main:login'%}">
@@ -31,7 +31,7 @@
 
                         <span class="input-group-addon" style="color:#000000"><i class="glyphicon glyphicon-user"></i></span>
 
-                        <input type="text" class="form-control" id="txtUsuario" placeholder="Nombre de usuario" required name="username">
+                        <input type="text" class="form-control" id="id_username" placeholder="Nombre de usuario" required name="username">
 
                     </div>
                 </div>
@@ -41,7 +41,7 @@
 
                         <span class="input-group-addon" style="color:#000000"><i class="glyphicon glyphicon-lock"></i></span>
 
-                        <input type="password" class="form-control" id="txtClave" placeholder="Contraseña" required name="password">
+                        <input type="password" class="form-control" id="id_password" placeholder="Contraseña" required name="password">
 
                     </div>
                 </div>
@@ -63,4 +63,12 @@
 
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+$("#id_username").focus()
+
+</script>
 {% endblock %}
