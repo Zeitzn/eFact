@@ -23,5 +23,6 @@ urlpatterns = [
     path('home/', include('apps.home.urls')),
     path('producto/', include('apps.producto.urls')),
     path('establecimiento/', include('apps.establecimiento.urls')),
+    path('venta/', include('apps.venta.urls')),
     path('logout', logout_then_login, name='logout'),
 ]

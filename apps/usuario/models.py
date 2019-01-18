@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from apps.cliente.models import Cliente
 
 # Create your models here.
 class Usuario(models.Model):
@@ -13,6 +14,7 @@ class Usuario(models.Model):
     apellido_materno = models.CharField(max_length=50)    
     activo = models.BooleanField(default=False)
     usuario_login = models.OneToOneField(User, on_delete=models.PROTECT,null=True)
+    cliente=models.ManyToManyField(Cliente)
     
 
     def __str__(self):

@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from apps.producto.models import Producto
 from django.views.decorators.csrf import csrf_exempt
+from apps.usuario.models import Usuario
 import json
 # Create your views here.
 

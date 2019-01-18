@@ -96,7 +96,7 @@
                     <ul class="nav flex-column custom-scrollbar" id="sidenav" data-children=".nav-item">
 
                         <li class="subheader">
-                            <span>OPERACIONES</span>
+                            <span>HOME</span>
                         </li>
 
 
@@ -105,7 +105,7 @@
 
                                 <i class="icon s-4 icon-tile-four"></i>
 
-                                <span>Facturación</span>
+                                <span>Inicio</span>
                             </a>
                         </li>
 
@@ -139,14 +139,35 @@
                         </li>
 
                         <li class="nav-item">
-                                <a class="nav-link ripple " href="#">
+                            <a class="nav-link ripple " href="#">
     
-                                    <i class="icon s-4 icon-domain"></i>
+                                <i class="icon s-4 icon-domain"></i>
     
-                                    <span>Clientes</span>
-                                </a>
-                            </li>
+                                <span>Clientes</span>
+                            </a>
+                        </li>
 
+                        <li class="subheader">
+                            <span>FACTURACION</span>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link ripple " href="{% url 'venta:index' %}">
+    
+                                <i class="icon s-4 icon-domain"></i>
+    
+                                <span>Lista de ventas</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link ripple " href="{% url 'venta:generar' %}">
+    
+                                <i class="icon s-4 icon-domain"></i>
+    
+                                <span>Generar Venta</span>
+                            </a>
+                        </li>
 
 
                     </ul>
