@@ -8,6 +8,11 @@ import json
 # Create your views here.
 
 def index(request):
+    if request.user.is_authenticated:
+        oUsuario = Usuario.objects.get(usuario_login_id=request.user.id)        
+    else:
+        oUsuario = ''
+
     oProductos=Producto.objects.all()
 
     context={
@@ -15,7 +20,11 @@ def index(request):
     }
     # try:
     if request.method=='POST':        
-        form=Producto(nombre=request.POST['nombre'],precio_unitario=request.POST['precio_unitario'])
+        form=Producto(
+            nombre=request.POST['nombre'],
+            precio_unitario=request.POST['precio_unitario'],
+            ruc_usuario=oUsuario.ruc
+            )
         form.save()
         messages.add_message(request, messages.INFO, "El registro fue agregado con éxito.")
         # return redirect('producto:index')        

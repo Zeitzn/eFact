@@ -6,9 +6,20 @@
 {%block content%}
 <div class="jumbotron">
   <div class="fact-panel">
+
     <div class="fact-header">
 
+    ESTABLECIMIENTO:
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEstablecimientos">
+        <i class="icon icon-magnify"></i>
+    </button>
+    PRODUCTOS:
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalProductos">
+        <i class="icon icon-magnify"></i>
+    </button>
+          
     </div>
+
     <div class="fact-body">
 
     </div>
@@ -17,4 +28,134 @@
     </div>
   </div>
 </div>
+
+
+<!-- ESTABLECIMIENTOS -->
+<div id="modalEstablecimientos" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="modalEstablecimientosLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEstablecimientosLabel">Seleccionar establecimiento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover small">
+                    <thead>
+                        <tr>
+                            <td>
+                                #
+                            </td>
+                            <td>
+                                DIRECCION
+                            </td>
+                            <td>
+                                TIPO DE ESTABLECIMIENTO
+                            </td>
+                            <td>
+                                UBIGEO
+                            </td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tfoot>
+            
+                    </tfoot>
+                    <tbody>
+                        {% if establecimientos %}
+                        {% for item in establecimientos %}
+                        <tr id="tr_{{item.id}}">
+                            <td>
+                                {{forloop.counter}}
+                            </td>
+                            <td id="td_direccion_{{item.id}}">
+                                {{item.direccion}}
+                                
+                            </td>
+                            <td id="td_tipo_establecimiento_{{item.id}}">
+                                {{item.tipo_establecimiento}}
+                                
+                            </td>
+                            <td id="td_ubigeo_{{item.id}}">
+                                {{item.ubigeo}}
+                                
+                            </td>
+                            <td id="td_actions_{{item.id}}">
+                                <a onclick="selectEstablecimiento('{{item.id}}','{{item.direccion}}','{{item.tipo_establecimiento}}','{{item.ubigeo}}')" class="btn btn-warning btn-sm icon icon-link-variant"></a>
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</div> 
+<!-- // ESTABLECIMIENTOS -->
+
+<!-- PRODUCTOS -->
+<div id="modalProductos" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="modalProductosLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalProductosLabel">Seleccionar productos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover small">
+                    <thead>
+                        <tr>
+                            <td>
+                                #
+                            </td>
+                            <td>
+                                NOMBRE
+                            </td>
+                            <td>
+                                PRECIO UNITARIO (S/)
+                            </td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tfoot>
+            
+                    </tfoot>
+                    <tbody>
+                        {% if productos %}
+                        {% for item in productos %}
+                        <tr id="tr_{{item.id}}">
+                            <td>
+                                {{forloop.counter}}
+                            </td>
+                            <td id="td_nombre_{{item.id}}">
+                                {{item.nombre}}
+                                
+                            </td>
+                            <td class="text-right" style="padding-right:100px;" id="td_precio_{{item.id}}">
+                                {{item.precio_unitario}}
+                            </td>
+                            <td id="td_actions_{{item.id}}">
+                                <a onclick="selectProduct('{{item.id}}','{{item.nombre}}','{{item.precio_unitario}}')" class="btn btn-warning btn-sm icon icon-link-variant"></a>
+                                
+                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</div> 
+<!-- // PRODUCTOS -->
 {% endblock %}

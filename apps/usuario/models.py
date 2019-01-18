@@ -10,10 +10,8 @@ class Usuario(models.Model):
     fecha = models.DateTimeField(auto_now_add=True,blank=True, null=True)
     nombres = models.CharField(max_length=50)
     apellido_paterno = models.CharField(max_length=50)
-    apellido_materno = models.CharField(max_length=50)
-    
+    apellido_materno = models.CharField(max_length=50)    
     activo = models.BooleanField(default=False)
-
     usuario_login = models.OneToOneField(User, on_delete=models.PROTECT,null=True)
     
 

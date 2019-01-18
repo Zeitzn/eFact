@@ -6,7 +6,7 @@ class Producto(models.Model):
     
     nombre = models.CharField(max_length=200)
     precio_unitario = models.DecimalField(max_digits=18, decimal_places=2)
-    
+    ruc_usuario=models.CharField(max_length=12)
     
 
     def __str__(self):
