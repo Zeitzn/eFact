@@ -14,7 +14,7 @@ class Usuario(models.Model):
     apellido_materno = models.CharField(max_length=50)    
     activo = models.BooleanField(default=False)
     usuario_login = models.OneToOneField(User, on_delete=models.PROTECT,null=True)
-    cliente=models.ManyToManyField(Cliente)
+    # cliente=models.ManyToManyField(Cliente)
     
 
     def __str__(self):

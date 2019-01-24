@@ -32,7 +32,7 @@ def generate(request):
     else:
         oUsuario = ''
 
-    oProductos=Producto.objects.filter(ruc_usuario=oUsuario.ruc)
+    oProductos=Producto.objects.all()
     oEstablecimientos=Establecimiento.objects.filter(
         usuario=oUsuario
         )

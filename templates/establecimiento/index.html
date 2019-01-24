@@ -71,9 +71,9 @@
             <tfoot>
     
             </tfoot>
-            <tbody>
-                {% if establecimientos %}
-                {% for item in establecimientos %}
+            <tbody id="establecimiento-body">
+                <!-- { if establecimientos %}
+                { for item in establecimientos %}
                 <tr id="tr_{{item.id}}">
                     <td>
                         {{forloop.counter}}
@@ -96,8 +96,8 @@
                         
                     </td>
                 </tr>
-                {% endfor %}
-                {% endif %}
+                { endfor %}
+                { endif %} -->
             </tbody>
         </table>
     </div>
@@ -112,8 +112,12 @@
 
 <script>
 
-$("#id_direccion").focus()
 
+
+$(document).ready(function(){
+    listEstablecimiento()
+    $("#id_direccion").focus()
+})
 
 function validForm(){
     var direccion=$("#id_direccion").val();
@@ -129,32 +133,78 @@ function validForm(){
 
 $("#form-establecimiento").on("submit",function(e){
     e.preventDefault()
+    // console.log(getUserSession())
+
+    $.ajax({
+        method:'get',
+        url:'{% url "usuario:getUserSession" %}',
+        success:function(data_id){
+            if (validForm()==true) {      
     
-    if (validForm()==true) {      
-    
-        $.ajax({
-            method:"POST",
-            url:'{% url "establecimiento:index"%}',
-            data:$('#form-establecimiento').serialize(),
-            success:function(data){                  
-                $("#panel-table").load(" #panel-table>*","");        
-                $("#msg-direccion").html('')
-                $("#msg-ubigeo").html('')
-                $("#msg-tipo").html('')
-                $("#msg-success").html('<div class="alert-success"><label>Registro exitoso</label></div>')
+                $.ajax({
+                    method:"POST",
+                    url:'{% url "establecimiento:create"%}',
+                    // data:$('#form-establecimiento').serialize(),
+                    data:JSON.stringify({
+                        'direccion':$("#id_direccion").val(),
+                        'tipo_establecimiento':$("#id_tipo").val(),
+                        'ubigeo':$("#id_ubigeo").val(),
+                        'usuario':data_id,
+                    }),
+                    contentType: "application/json",  
+                    success:function(data){                  
+                        // $("#panel-table").load(" #panel-table>*","");
+                        listEstablecimiento()
+                        $("#msg-direccion").html('')
+                        $("#msg-ubigeo").html('')
+                        $("#msg-tipo").html('')
+                        $("#msg-success").html('<div class="alert-success"><label>Registro exitoso</label></div>')
+
+                        $("#form-establecimiento")[0].reset()
+                        $("#id_direccion").focus()
+                    }
+                })
+            } else {
+                var msg='Complete este campo'
+                $("#msg-direccion").html(msg)
+                $("#msg-ubigeo").html(msg)
+                $("#msg-tipo").html(msg)
+                $("#msg-success").html('')
             }
-        })
-    } else {
-        var msg='Complete este campo'
-        $("#msg-direccion").html(msg)
-        $("#msg-ubigeo").html(msg)
-        $("#msg-tipo").html(msg)
-        $("#msg-success").html('')
-    }
+            
+        }        
+    })
+
+    
 })
 
+function listEstablecimiento(){
+    $.ajax({
+        method:'get',
+        url:'{% url "establecimiento:list" %}',
+        dataType: 'json',
+        success:function(data){          
 
+        $("#establecimiento-body").html('')
+        $.each(data, function(i, item) {         
 
+         
+            $("#establecimiento-body").append(              
+                '<tr id="tr_'+item.id+'">'
+                    +'<td>'+(i+1)+'</td>'
+                    +'<td id="td_direccion_'+item.id+'">'+item.direccion+'</td>'
+                    +'<td id="td_tipo_establecimiento_'+item.id+'">'+item.tipo_establecimiento+'</td>'
+                    +'<td id="td_ubigeo_'+item.id+'">'+item.ubigeo+'</td>'
+                    +'<td id="td_actions_'+item.id+'">'
+                    +'<a onclick="editEstablecimiento('+item.id+',\''+item.direccion+'\',\''+item.tipo_establecimiento+'\',\''+item.ubigeo+'\')" class="btn btn-warning btn-sm">Editar</a>'
+                    +'<a onclick="deleteEstablecimiento('+item.id+',\''+item.direccion+'\')" class="btn btn-danger btn-sm">Eliminar</a>'
+                    +'</td>'
+                +'</tr>'
+            )
+        });
+        }
+    })
+}
 function editEstablecimiento(id,direccion,tipo,ubigeo){
     var id_establecimiento=id;
     
@@ -192,19 +242,22 @@ function editEstablecimiento(id,direccion,tipo,ubigeo){
     
     $("#guardar_"+id).on("click",function(){
         $.ajax({
-            method:"POST",
+            method:"PUT",
             // url:'update/'+id+'/'+nombre+'/'+precio,
-            url:'{% url "establecimiento:update"%}',
+            // url:'{% url "establecimiento:update"}',
+            url:"update/"+id_establecimiento,
             // contentType:'application/json',
-            data:{
-                'id':id_establecimiento,
+            data:JSON.stringify({
+                // 'id':id_establecimiento,
                 'direccion':v_direccion,
                 'tipo_establecimiento':v_tipo_establecimiento,
                 'ubigeo':v_ubigeo,
-            },
+            }),
+            contentType: "application/json",
             success:function(data){                  
                 // $("#panel-table").load(" #panel-table>*","");        
-                $("#tr_"+id).load(" #tr_"+id+">*","");    
+                // $("#tr_"+id).load(" #tr_"+id+">*","");    
+                listEstablecimiento()
             }
         })
     })
@@ -218,14 +271,17 @@ function deleteEstablecimiento(id,nombre){
         $.ajax({
             method:"POST",
             // url:'update/'+id+'/'+nombre+'/'+precio,
-            url:'{% url "establecimiento:delete"%}',
+            // url:'{% url "establecimiento:delete"}',
+            url:"delete/"+id_establecimiento,
             // contentType:'application/json',
-            data:{
-                'id':id_establecimiento,                
-            },
+            // data:{
+            //     'id':id_establecimiento,                
+            // },
+            contentType: "application/json",
             success:function(data){                  
                 // $("#panel-table").load(" #panel-table>*","");        
-                $("#tr_"+id).load(" #tr_"+id+">*","");       
+                // $("#tr_"+id).load(" #tr_"+id+">*","");
+                listEstablecimiento()    
                 
             }
         })
@@ -234,7 +290,26 @@ function deleteEstablecimiento(id,nombre){
         return false;
     }
 }
+function getUserSession(){
+    var id;
+    $.ajax({
+        method:'get',
+        url:'{% url "usuario:getUserSession" %}',
+        success:function(data){
+            // console.log(data[0].pk);
 
+            // id=data[0].pk
+            id=data
+
+            return data
+            // console.log(id)
+            
+        }        
+    })
+
+   
+    
+}
 
 </script>
 {% endblock %}

@@ -7,14 +7,7 @@
 <div class="jumbotron">
     <div class="col-md-5">
         <form action="" method="POST" id="form-producto">
-            <h3>Producto</h3>
-            <!-- {% if messages %}
-            <div class="alert-success">
-                {% for message in messages %}
-                <li> {{ message }} </li>
-                {% endfor %}
-            </div>
-            {% endif %} -->
+            <h3>Producto</h3>            
 
             <div class="" id="msg-success">
 
@@ -58,8 +51,8 @@
             <tfoot>
     
             </tfoot>
-            <tbody>
-                {% if productos %}
+            <tbody id="producto-body">
+                <!-- {% if productos %}
                 {% for item in productos %}
                 <tr id="tr_{{item.id}}">
                     <td>
@@ -79,7 +72,7 @@
                     </td>
                 </tr>
                 {% endfor %}
-                {% endif %}
+                {% endif %} -->
             </tbody>
         </table>
     </div>
@@ -95,6 +88,10 @@
 <script>
 
 $("#id_nombre").focus()
+
+$(document).ready(function(){
+    listProduct()
+})
 
 
 function validForm(){
@@ -115,13 +112,21 @@ $("#form-producto").on("submit",function(e){
     
         $.ajax({
             method:"POST",
-            url:'{% url "producto:index"%}',
-            data:$('#form-producto').serialize(),
+            url:'{% url "producto:create"%}',
+            // data:$('#form-producto').serialize(),
+            data:JSON.stringify({
+                'nombre':$("#id_nombre").val(),
+                'precio_unitario':$("#id_precio_unitario").val()
+            }),
+            contentType: "application/json",            
             success:function(data){                  
-                $("#panel-table").load(" #panel-table>*","");        
+                // $("#panel-table").load(" #panel-table>*",""); 
+                listProduct()       
                 $("#msg-nombre").html('')
                 $("#msg-precio-unitario").html('')
                 $("#msg-success").html('<div class="alert-success"><label>Registro exitoso</label></div>')
+                $("#form-producto")[0].reset()
+                $("#id_nombre").focus()
             }
         })
     } else {
@@ -132,13 +137,35 @@ $("#form-producto").on("submit",function(e){
     }
 })
 
+function listProduct(){
+    $.ajax({
+        method:'get',
+        url:'{% url "producto:list" %}',
+        dataType: 'json',
+        success:function(data){
+           
+        $("#producto-body").html('')
+        $.each(data, function(i, item) {         
 
+         
+            $("#producto-body").append(              
+                '<tr id="tr_'+item.id+'">'
+                    +'<td>'+(i+1)+'</td>'
+                    +'<td id="td_nombre_'+item.id+'">'+item.nombre+'</td>'
+                    +'<td id="td_precio_'+item.id+'">'+item.precio_unitario+'</td>'
+                    +'<td id="td_actions_'+item.id+'">'
+                    +'<a onclick="editProduct('+item.id+',\''+item.nombre+'\',\''+item.precio_unitario+'\')" class="btn btn-warning btn-sm">Editar</a>'
+                    +'<a onclick="deleteProduct('+item.id+',\''+item.nombre+'\')" class="btn btn-danger btn-sm">Eliminar</a>'
+                    +'</td>'
+                +'</tr>'
+            )
+        });
+        }
+    })
+}
 
 function editProduct(id,nombre,precio){
-    var id_producto=id;
-    
-    
-    
+    var id_producto=id; 
 
     $("#td_nombre_"+id).html("<input type='text' value='"+nombre+"' class='form-control-p' id='edit_nombre_"+id+"'/> ");
     $("#td_precio_"+id).html("<input type='text' value='"+precio+"' class='form-control-p' id='edit_precio_"+id+"' step='0.1'/> ");
@@ -164,18 +191,21 @@ function editProduct(id,nombre,precio){
     
     $("#guardar_"+id).on("click",function(){
         $.ajax({
-            method:"POST",
+            method:"PUT",
             // url:'update/'+id+'/'+nombre+'/'+precio,
-            url:'{% url "producto:update"%}',
+            // url:'{% url "producto:update"}',
+            url:"update/"+id_producto,
             // contentType:'application/json',
-            data:{
-                'id':id_producto,
+            data:JSON.stringify({
+                // 'pk':id_producto,
                 'nombre':v_nombre,
-                'precio':v_precio,
-            },
+                'precio_unitario':v_precio,
+            }),
+            contentType: "application/json",
             success:function(data){                  
                 // $("#panel-table").load(" #panel-table>*","");        
-                $("#tr_"+id).load(" #tr_"+id+">*","");    
+                // $("#tr_"+id).load(" #tr_"+id+">*","");    
+                listProduct()
             }
         })
     })
@@ -187,16 +217,14 @@ function deleteProduct(id,nombre){
     var c=confirm("¿Está seguro que desea eliminar el producto "+nombre+"?")
     if(c==true){
         $.ajax({
-            method:"POST",
-            // url:'update/'+id+'/'+nombre+'/'+precio,
-            url:'{% url "producto:delete"%}',
-            // contentType:'application/json',
-            data:{
-                'id':id_producto,                
-            },
+            method:"DELETE",
+            url:"delete/"+id_producto,
+            // url:'{% url "producto:delete"}',
+            contentType:'application/json',            
             success:function(data){                  
-                // $("#panel-table").load(" #panel-table>*","");        
-                $("#tr_"+id).load(" #tr_"+id+">*","");       
+                
+                // $("#tr_"+id).load(" #tr_"+id+">*","");    
+                listProduct()   
                 
             }
         })
