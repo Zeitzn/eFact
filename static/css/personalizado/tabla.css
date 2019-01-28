@@ -2,3 +2,10 @@ thead{
     background-color: #2D323E;
     color:white;
 }
+.panel-table-main{
+    height:400px;
+}
+
+.panel-table-modal{
+    height:400px;
+}

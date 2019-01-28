@@ -286,6 +286,32 @@
         </div>
     </main>
 
+    <script>
+    // $(document).ready( function () {
+	// 	$('.dataTable').dataTable( {
+	// 	    "searching": true
+	// 	} );
+    // } );
+    // Write on keyup event of keyword input element
+        $(document).ready(function(){
+            // $('.dataTable').dataTable( {
+            // "searching": false,
+            // "bLengthChange": false,
+            // "sInfo": false
+		    // } );
+            $(".inp-search").keyup(function(){
+                _this = this;
+                // Show only matching TR, hide rest of them
+                $.each($(".dataTable tbody tr"), function() {
+                    if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                    $(this).hide();
+                    else
+                    $(this).show();
+                });
+            });
+        });
+    </script>
+
     {% block scripts %}
 {% endblock %}
 </body>

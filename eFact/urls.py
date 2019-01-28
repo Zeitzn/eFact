@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import path, include, reverse
 from django.contrib.auth.views import logout_then_login
+
+# from django.conf import settings
+# from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.main.urls')),
@@ -27,3 +30,5 @@ urlpatterns = [
     path('venta/', include('apps.venta.urls')),
     path('logout', logout_then_login, name='logout'),
 ]
+
+# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
