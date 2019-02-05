@@ -23,14 +23,52 @@
             {% csrf_token %}
             <div class="row">
             <div class="col-md-5">
-                <label for="">Nombre:</label><br>
-                <span id="msg-precio-unitario" class="span-alert"></span>
-                <input type="text" class="form-control-p" name="nombre" id="id_nombre">
+                <div class="form-group">                
+                    <label for="">Nombre:</label><br>
+                    <span id="msg-precio-unitario" class="span-alert"></span>
+                    <input type="text" class="form-control-p" name="nombre" id="id_nombre">
+                </div>
             </div>
+
             <div class="col-md-3">
-                <label for="">Precio unitario (S/):</label><br>
-                <span id="msg-nombre" class="span-alert"></span>
-                <input type="number" class="form-control-p" name="precio_unitario" step="0.1" id="id_precio_unitario">
+                <div class="form-group">
+                    <label for="">Precio unitario (S/):</label><br>
+                    <span id="msg-nombre" class="span-alert"></span>
+                    <input type="number" class="form-control-p" name="precio_unitario" step="0.1" id="id_precio_unitario">
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">Unidad de medida:</label><br>
+                        <select name="unidad" id="id_unidad" class=" form-control-p" required>
+                            <option value="">-- Seleccionar unidad --</option>
+                            <option value="barriles">barriles</option>
+                            <option value="cajas">cajas</option>
+                            <option value="galones">galones</option>
+                            <option value="gramos">gramos</option>
+                            <option value="kilogramos">kilogramos</option>
+                            <option value="latas">latas</option>
+                            <option value="libras">libras</option>
+                            <option value="litros">litros</option>
+                            <option value="metros">metros</option>
+                            <option value="metros cúbicos">metros cúbicos</option>
+                            <option value="millares">millares</option>
+                            <option value="toneladas cortas">toneladas cortas</option>
+                            <option value="toneladas largas">toneladas largas</option>
+                            <option value="toneladas métricas">toneladas métricas</option>
+                            <option value="unidades">unidades</option>
+                        </select>
+                    </div>
+                </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="">Establecimiento:</label><br>
+                    <select name="establecimiento" id="id_establecimiento" class="establecimiento form-control-p" required>
+                        <option value="">-- Seleccionar establecimiento --</option>
+                    </select>
+                </div>
             </div>
 
             <div class="col-md-2">  
@@ -44,8 +82,8 @@
     </div>
 
     <hr>
-    <input type="text" class="form-control-p inp-search" style="width:20%" id="search" placeholder="Buscar en la tabla ...">
-    <hr>
+    <!-- <input type="text" class="form-control-p inp-search" style="width:20%" id="search" placeholder="Buscar en la tabla ...">
+    <hr> -->
     <div col-md-12 id="panel-table" class="table-responsive panel-table-main">
         <table class="table table-bordered table-hover small dataTable">
             <thead>
@@ -57,7 +95,13 @@
                         NOMBRE
                     </td>
                     <td>
+                        UNIDAD DE MEDIDA
+                    </td>
+                    <td>
                         PRECIO UNITARIO (S/)
+                    </td>
+                    <td>
+                        ESTABLECIMIENTO
                     </td>
                     <td></td>
                 </tr>
@@ -105,6 +149,7 @@ $("#id_nombre").focus()
 
 $(document).ready(function(){
     listProduct()
+    listEstablecimiento()
     $(".inp-search").focus()
 })
 
@@ -131,7 +176,9 @@ $("#form-producto").on("submit",function(e){
             // data:$('#form-producto').serialize(),
             data:JSON.stringify({
                 'nombre':$("#id_nombre").val(),
-                'precio_unitario':$("#id_precio_unitario").val()
+                'precio_unitario':$("#id_precio_unitario").val(),
+                'establecimiento':$("#id_establecimiento").val(),
+                'unidad':$("#id_unidad").val()
             }),
             contentType: "application/json",            
             success:function(data){                  
@@ -158,7 +205,7 @@ function listProduct(){
         url:'{% url "producto:list" %}',
         dataType: 'json',
         success:function(data){
-           
+            console.log(data)
         $("#producto-body").html('')
         $.each(data, function(i, item) {         
 
@@ -167,29 +214,62 @@ function listProduct(){
                 '<tr id="tr_'+item.id+'">'
                     +'<td>'+(i+1)+'</td>'
                     +'<td id="td_nombre_'+item.id+'">'+item.nombre+'</td>'
+                    +'<td id="td_unidad_'+item.id+'">'+item.unidad+'</td>'
                     +'<td id="td_precio_'+item.id+'">'+item.precio_unitario+'</td>'
+                    +'<td id="td_establecimiento_'+item.id+'">'+item.establecimiento+'</td>'
                     +'<td id="td_actions_'+item.id+'">'
-                    +'<a onclick="editProduct('+item.id+',\''+item.nombre+'\',\''+item.precio_unitario+'\')" class="btn btn-warning btn-sm">Editar</a>'
+                    +'<a onclick="editProduct('+item.id+',\''+item.nombre+'\',\''+item.precio_unitario+'\',\''+item.establecimiento+'\')" class="btn btn-warning btn-sm">Editar</a>'
                     +'<a onclick="deleteProduct('+item.id+',\''+item.nombre+'\')" class="btn btn-danger btn-sm">Eliminar</a>'
                     +'</td>'
                 +'</tr>'
             )
         });
+
+        }
+    })
+    
+}
+
+function listEstablecimiento(){
+    $.ajax({
+        method:'get',
+        url:'{% url "establecimiento:list" %}',
+        dataType:'json',
+        success:function(data){
+            console.log(data)
+            $.each(data, function(i, item) {
+                $(".establecimiento").append(
+                    '<option value="'+item.id+'">'+item.direccion+'</option>'
+                )
+            });
         }
     })
 }
 
-function editProduct(id,nombre,precio){
+function editProduct(id,nombre,precio,establecimiento){
     var id_producto=id; 
 
     $("#td_nombre_"+id).html("<input type='text' value='"+nombre+"' class='form-control-p' id='edit_nombre_"+id+"'/> ");
     $("#td_precio_"+id).html("<input type='text' value='"+precio+"' class='form-control-p' id='edit_precio_"+id+"' step='0.1'/> ");
+    $("#td_establecimiento_"+id).html("<select value='"+precio+"' class='form-control-p establecimiento' id='edit_establecimiento_"+id+"'></select> ");
     $("#td_actions_"+id).html('<a href="#" id="guardar_'+id+'">Guardar</a>')
     $("#edit_"+id).focus();
 
+    
+
+    listEstablecimiento()
+
+    $("#edit_establecimiento_"+id).val(establecimiento)
+
+    console.log(establecimiento)
 
     var v_nombre=$("#edit_nombre_"+id).val();
     var v_precio=$("#edit_precio_"+id).val();
+    var v_establecimiento=establecimiento
+
+    $("#edit_establecimiento_"+id).on('change',function(e){   
+        v_establecimiento=$("#edit_establecimiento_"+id).val();        
+    })
 
     $("#edit_nombre_"+id).keyup(function(){
         v_nombre=$("#edit_nombre_"+id).val();
@@ -215,6 +295,7 @@ function editProduct(id,nombre,precio){
                 // 'pk':id_producto,
                 'nombre':v_nombre,
                 'precio_unitario':v_precio,
+                'establecimiento':v_establecimiento,
             }),
             contentType: "application/json",
             success:function(data){                  

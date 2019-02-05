@@ -6,7 +6,7 @@ class Factura(models.Model):
     
     usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT, null=True)
     cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT, null=True)
-    fecha_emision = models.DateTimeField(blank=True, null=False)
+    fecha_emision = models.DateTimeField(blank=True, null=True)
     fecha_vencimiento = models.DateTimeField(blank=True, null=True)
     numero_factura=models.CharField(max_length=12)
     

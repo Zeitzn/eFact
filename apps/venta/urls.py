@@ -5,6 +5,6 @@ from django.contrib.auth.decorators import login_required
 app_name='venta'
 urlpatterns = [
     path('', login_required(views.index), name='index'),
-    path('gen/', login_required(views.generate), name='generar'),
-    # path('delete/', login_required(views.delete), name='delete'),
+    path('gen/', login_required(views.generarVenta), name='generar'),
+    path('registrar/', login_required(views.registrarFactura), name='registrarFactura'),
 ]

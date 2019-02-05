@@ -139,7 +139,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link ripple " href="#">
+                            <a class="nav-link ripple " href="{% url 'cliente:index'%}">
     
                                 <i class="icon s-4 icon-domain"></i>
     
@@ -266,6 +266,7 @@
                             <div class="page-content">
 
                               {% block content %}
+
                               {% endblock %}
 
 
@@ -294,11 +295,11 @@
     // } );
     // Write on keyup event of keyword input element
         $(document).ready(function(){
-            // $('.dataTable').dataTable( {
-            // "searching": false,
-            // "bLengthChange": false,
-            // "sInfo": false
-		    // } );
+        //     $('.dataTable').dataTable( {
+        //     "searching": true,
+        //     "bLengthChange": false,
+            
+		//     } );
             $(".inp-search").keyup(function(){
                 _this = this;
                 // Show only matching TR, hide rest of them
@@ -312,7 +313,7 @@
         });
     </script>
 
-    {% block scripts %}
+{% block scripts %}
 {% endblock %}
 </body>
 

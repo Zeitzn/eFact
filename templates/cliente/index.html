@@ -1,0 +1,42 @@
+{% extends 'base/base_home.html'%}
+{% load staticfiles %}
+
+{%block title%}Home-eFact{% endblock %}
+
+{%block content%}
+<div class="jumbotron">
+    Clientes
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+function getCliente(){
+    var ruc=10702290975
+
+    $.ajax({
+        method:"get",
+        url:"https://api.sunat.cloud/ruc/20552103816",
+        headers:{
+            'Access-Control-Allow-Origin':'*'
+        },
+        // crossDomain: true,
+        dataType: 'jsonp',
+        // contentType:"application/json",
+        success: function(data,textStatus,xhr){
+            console.log(data)
+        },
+        error:function(xhr,textStatus,errorThrown){
+            console.log('Error Something')
+        }
+    })
+}
+
+// getCliente()
+</script>
+
+
+{% endblock %}

@@ -5,34 +5,118 @@
 
 {%block content%}
 <div class="jumbotron">
-  <div class="fact-panel">
+    <h3>Nueva Venta</h3>
+    <div class="fact-panel">
 
-    <div class="fact-header">
+        <div class="fact-header">
+            <div class="panel-order">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="">Nº: </label>
+                        <input type="text" value="FA00001" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="">Fecha: </label>
+                        <input type="text" value="28/01/2018" disabled>
+                    </div>
+                </div>
+            </div>
 
-    ESTABLECIMIENTO:
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEstablecimientos">
-        <i class="icon icon-magnify"></i>
-    </button>
-    PRODUCTOS:
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalProductos">
-        <i class="icon icon-magnify"></i>
-    </button>
-          
+            <div class="client-panel">
+                <div class="row small">
+                    <div class="col-md-12">
+                        <!-- <label for=""><b>Cliente:</b></label> -->
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEstablecimientos">
+                            Cliente
+                        </button>
+
+                    </div>
+                    <div class="col-md-2">
+                        <label for=""><b>RUC:</b></label>
+                        <label for="" id="id_ruc">20736780191</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label for=""><b>Nombre/Razón social:</b></label>
+                        <label for="" id="id_razon_social">Distribuidora Lost</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label for=""><b>Dirección:</b></label>
+                        <label for="" id="id_razon_social">Asociación Guaman Poma de Ayala Mz. H Lte. 04</label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="panel-order">
+                <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalEstablecimientos">
+                    Seleccionar establecimiento
+                </button> -->
+                        
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalProductos">
+                    Seleccionar productos
+                </button>
+            </div>
+
+            
+            
+
+        </div>
+
+        <div class="fact-body">
+
+            <table class="table table-bordered table-hover small" id="table">
+                <thead class="thead">
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Eliminar
+                    </th>
+                    <th>
+                        Descripción del producto
+                    </th>
+                    <th>
+                        Unidad de medida
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Precio unitario + IGV
+                    </th>                    
+                    <th>
+                        Precio de Venta
+                    </th>
+                </thead>
+                <tbody id="body-factura">
+                    <!-- <tr></tr> -->
+                </tbody>
+            </table>
+
+
+
+        </div>
+        <div class="fact-footer small">
+            <div>
+                <label for=""><b>Sub Total: </b></label>
+                <input type="text" id="id_sub_total" disabled value="0.00">
+                <label for=""><b>IGV: </b></label>
+                <input type="text" id="id_igv" disabled value="0.00">
+                <label for=""><b>Total: </b></label>
+                <input type="text" id="id_total" disabled value="0.00">
+            </div>
+        </div>
     </div>
-
-    <div class="fact-body">
-
+    <div class="panel-order">
+        <button class="btn btn-success btn-sm" onclick="generarVenta()">Guardar</button>
     </div>
-    <div class="fact-footer">
-
-    </div>
-  </div>
 </div>
 
 
 <!-- ESTABLECIMIENTOS -->
-<div id="modalEstablecimientos" class="modal fade" tabindex="-1" role="dialog"
-     aria-labelledby="modalEstablecimientosLabel" aria-hidden="true">
+<div id="modalEstablecimientos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalEstablecimientosLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -42,69 +126,70 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <input type="text" class="form-control-p inp-search"  placeholder="Buscar en la tabla ...">
-                    <hr>
-                    <div class="table-responsive panel-table-modal">
-                <table class="table table-bordered table-hover small">
-                    <thead>
-                        <tr>
-                            <td>
-                                #
-                            </td>
-                            <td>
-                                DIRECCION
-                            </td>
-                            <td>
-                                TIPO DE ESTABLECIMIENTO
-                            </td>
-                            <td>
-                                UBIGEO
-                            </td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tfoot>
-            
-                    </tfoot>
-                    <tbody>
-                        {% if establecimientos %}
-                        {% for item in establecimientos %}
-                        <tr id="tr_{{item.id}}">
-                            <td>
-                                {{forloop.counter}}
-                            </td>
-                            <td id="td_direccion_{{item.id}}">
-                                {{item.direccion}}
-                                
-                            </td>
-                            <td id="td_tipo_establecimiento_{{item.id}}">
-                                {{item.tipo_establecimiento}}
-                                
-                            </td>
-                            <td id="td_ubigeo_{{item.id}}">
-                                {{item.ubigeo}}
-                                
-                            </td>
-                            <td id="td_actions_{{item.id}}">
-                                <a onclick="selectEstablecimiento('{{item.id}}','{{item.direccion}}','{{item.tipo_establecimiento}}','{{item.ubigeo}}')" class="btn btn-warning btn-sm icon icon-link-variant"></a>
-                                
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        {% endif %}
-                    </tbody>
-                </table>
+                <input type="text" class="form-control-p inp-search" placeholder="Buscar en la tabla ...">
+                <hr>
+                <div class="table-responsive panel-table-modal">
+                    <table class="table table-bordered table-hover small">
+                        <thead>
+                            <tr>
+                                <td>
+                                    #
+                                </td>
+                                <td>
+                                    DIRECCION
+                                </td>
+                                <td>
+                                    TIPO DE ESTABLECIMIENTO
+                                </td>
+                                <td>
+                                    UBIGEO
+                                </td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tfoot>
+
+                        </tfoot>
+                        <tbody>
+                            {% if establecimientos %}
+                            {% for item in establecimientos %}
+                            <tr id="tr_{{item.id}}">
+                                <td>
+                                    {{forloop.counter}}
+                                </td>
+                                <td id="td_direccion_{{item.id}}">
+                                    {{item.direccion}}
+
+                                </td>
+                                <td id="td_tipo_establecimiento_{{item.id}}">
+                                    {{item.tipo_establecimiento}}
+
+                                </td>
+                                <td id="td_ubigeo_{{item.id}}">
+                                    {{item.ubigeo}}
+
+                                </td>
+                                <td id="td_actions_{{item.id}}">
+                                    <a onclick="selectEstablecimiento('{{item.id}}','{{item.direccion}}','{{item.tipo_establecimiento}}','{{item.ubigeo}}')"
+                                        class="btn btn-warning btn-sm icon icon-link-variant"></a>
+
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            
+
         </div>
     </div>
-</div> 
+</div>
 <!-- // ESTABLECIMIENTOS -->
 
 <!-- PRODUCTOS -->
-<div id="modalProductos" class="modal fade" tabindex="-1" role="dialog"
-     aria-labelledby="modalProductosLabel" aria-hidden="true">
+<div id="modalProductos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalProductosLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -114,7 +199,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input type="text" class="form-control-p inp-search"  placeholder="Buscar en la tabla ...">
+                <input type="text" class="form-control-p inp-search" placeholder="Buscar en la tabla ...">
                 <hr>
                 <div class="table-responsive panel-table-modal">
                     <table class="table table-bordered table-hover small dataTable">
@@ -127,13 +212,16 @@
                                     NOMBRE
                                 </td>
                                 <td>
+                                    UNIDAD DE MEDIDA
+                                </td>
+                                <td>
                                     PRECIO UNITARIO (S/)
                                 </td>
                                 <td></td>
                             </tr>
                         </thead>
                         <tfoot>
-                
+
                         </tfoot>
                         <tbody>
                             {% if productos %}
@@ -144,15 +232,19 @@
                                 </td>
                                 <td id="td_nombre_{{item.id}}">
                                     {{item.nombre}}
-                                    
+
+                                </td>
+                                <td id="td_unidad_{{item.id}}">
+                                    {{item.unidad}}    
                                 </td>
                                 <td class="text-right" style="padding-right:100px;" id="td_precio_{{item.id}}">
                                     {{item.precio_unitario}}
                                 </td>
                                 <td id="td_actions_{{item.id}}">
-                                    <a onclick="selectProduct('{{item.id}}','{{item.nombre}}','{{item.precio_unitario}}')" class="btn btn-warning btn-sm icon icon-link-variant"></a>
-                                    
-                                    
+                                    <a onclick="selectProduct('{{item.id}}','{{item.nombre}}','{{item.precio_unitario}}','{{item.unidad}}')"
+                                        class="btn btn-warning btn-sm icon icon-link-variant"></a>
+
+
                                 </td>
                             </tr>
                             {% endfor %}
@@ -161,9 +253,201 @@
                     </table>
                 </div>
             </div>
-            
+
         </div>
     </div>
-</div> 
+</div>
 <!-- // PRODUCTOS -->
+{% endblock %}
+
+{% block scripts%}
+<script>
+
+var numero=0
+
+function selectProduct(id,nombre,precio,unidad){    
+
+    numero+=1
+    
+    var precio_unitario=precio/1.18
+    var igv=precio_unitario*0.18
+
+    console.log(precio_unitario,igv)
+
+    $("#body-factura").append(
+       '<tr id="tr_'+numero+'">'
+        +    '<td>'+numero+'</td>'
+        +    '<td class="btn-del"><button onclick="deleteRow('+numero+')" class="remove-row">--</button></td>'
+        +    '<td>'+nombre+'</td>'
+        +    '<td>'+unidad+'</td>'
+        +    '<td class="text-right"><input type="text" id="inpt_'+numero+'" value="1" onkeyup="updatePrecio('+numero+','+precio+')" class="form-control-p"/></td>'        
+        +    '<td class="text-right">'+precio+'</td>'
+        +    '<td class="text-right">'+precio+'</td>'
+       + '</tr>'
+    );
+
+        sumTotal()
+    $("#modalProductos").hide()
+    
+}
+
+function updatePrecio(id,precio){
+    var cantidad=$("#inpt_"+id).val()
+       
+    // console.log(cantidad)
+    $("#tr_"+id+" td:nth-child(7)").text(parseFloat(cantidad*precio).toFixed(2))
+    sumTotal()
+    
+}
+
+function deleteRow(id){
+    numero-=1
+    $("#tr_"+id).remove()
+    sumTotal()
+}
+
+function sumTotal(){
+    var $filas= $("#table tr:not('.thead')");
+    var total=0
+    
+
+  $filas.each(function() {
+    $(this).find('td:nth-child(7)').each(function(i) {
+    //   total+=parseInt($(this).html());
+    total+=parseFloat($(this).html())
+    console.log(i,$(this).html())
+
+     });
+    });
+
+    var sub_total=total/1.18
+    var igv=sub_total*0.18
+  console.log(total,parseFloat(sub_total).toFixed(2),parseFloat(igv).toFixed(2))
+
+  $("#id_sub_total").val(parseFloat(sub_total).toFixed(2))
+  $("#id_igv").val(parseFloat(igv).toFixed(2))
+  $("#id_total").val(parseFloat(total).toFixed(2))
+  
+}
+
+function generarVenta(){
+//     var totals = [];
+//  var $filas= $("#table tr:not('.thead')");
+//  var $columnas= $("#table td:not('.btn-del')");
+
+//   $filas.each(function() {
+//     $(this).find('td').each(function(i) {
+
+//         $columnas.each(function(){
+//             $(this).find('tr').each(function(j) {
+//                 if(i==2){
+//             // totals[2]=parseFloat($("td:nth-child(4)").text())/parseFloat($("td:nth-child(3)").text())
+//                 totals[j][2]=$("td:nth-child(4)").html()
+//             }else{
+//                 totals[j][i] = $(this).html();
+//             }
+//         })
+//     })
+    
+        
+        
+//     });
+//   });
+//   $(".total td").each(function(i) {
+//     if (i != 0)
+//       $(this).html(totals[i - 1]);
+//   });
+
+// console.log(totals)
+// ----------------------------------------------------------------------------------
+productos=[]
+objectData=[]
+
+// var productos=new Object()
+
+contador=0
+
+$("#table tbody tr").each(function(index){    
+
+    $(this).children("td").each(function(index2){
+        
+        switch(index2){
+            case 0:
+                numero_producto=$(this).text()                
+                break;
+            case 2:
+                descripcion=$(this).text()
+                break;
+            case 3:
+                unidad=$(this).text()
+                break;
+            case 4:
+                cantidad=$("#inpt_"+numero_producto).val()
+                break;
+            case 5:
+                valor_unitario=$(this).text()
+                break;
+            // case 6:
+            //     productos.precio_venta=$(this).text()
+            //     break;
+        }
+    })
+    contador=1
+
+    productos.push(
+        {
+        "cantidad":cantidad,
+        "unidad":unidad,
+        "descripcion":descripcion, 
+        "valor:unitario":valor_unitario
+        }
+        )
+
+    objectData.push(
+        {
+            "ruc_emisor":"10702290975",
+            "token":"asdassd",
+            "type":"factura",
+            "datos":
+            {
+                "cliente_ruc_dni":"20783788371",
+                "cliente_correo":"",
+                "items":productos
+            }
+        }
+    )    
+})
+
+
+// sendData=JSON.stringify(objectData)
+
+console.log(objectData)
+
+if (contador == 1) {
+        // var datos = {productos: productos,cliente:cliente};
+        var sendData = JSON.stringify(objectData);
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "{% url 'venta:registrarFactura' %}",
+            data: sendData,
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            cache: false,
+            CrossDomain: true,
+
+            success: function (result) {
+            //     var id_venta = result["id_venta"];
+                 alert('Pedido Registrado');
+                 //location.reload(true);
+                //  document.location.href='/Pedido/listar/';
+            }
+        });
+    }else{
+        alert("No registró ningún producto");
+    }
+
+}
+
+</script>
 {% endblock %}
