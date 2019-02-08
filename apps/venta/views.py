@@ -23,6 +23,7 @@ def index(request):
 
     context={
         'ventas':oDetalle_venta,
+        'facturas':oFactura,
         }
 
 
